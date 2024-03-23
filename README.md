@@ -12,8 +12,8 @@ Projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları izleyin.
 1. Bu depoyu yerel makinenize klonlayın.
 2. Terminali açın ve projenin klonlandığı dizine gidin.
 3. Bağımlılıkları yüklemek için `composer install` komutunu çalıştırın.
-4. php artisan.php setup:database komutu ile veritabanını oluşturun.
-5. php -S localhost:8888 -t public public/index.php  komutu ile projeyi başlatın.
+4. `php artisan.php setup:database` komutu ile veritabanını oluşturun.
+5. `php -S localhost:8888 -t public` public/index.php  komutu ile projeyi başlatın.
 
 ### Kullanım ve url yapısı
 
