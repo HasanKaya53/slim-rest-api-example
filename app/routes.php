@@ -22,15 +22,34 @@ return function (App $app) {
     });
 
     //get and post..
-    $app->get('/users', function (Request $request, Response $response) {
-
+    $app->get('/posts/', function (Request $request, Response $response) {
         $post = new Model\Post();
-
-
-        $response->getBody()->write($post->test());
-
-        return $response;
+        $jsonData = json_encode($post->getAll(), JSON_PRETTY_PRINT);
+        $response->getBody()->write('<pre>' . $jsonData . '</pre>');
+        return $response->withHeader('Content-Type', 'text/html');
     });
+
+    $app->get('/comments/', function (Request $request, Response $response) {
+        $comment = new Model\Comment();
+        $jsonData = json_encode($comment->getAll(), JSON_PRETTY_PRINT);
+        $response->getBody()->write('<pre>' . $jsonData . '</pre>');
+        return $response->withHeader('Content-Type', 'text/html');
+    });
+
+
+    $app->get('/posts/{post_id}/comments', function (Request $request, Response $response, $args) {
+        $comment = new Model\Comment();
+
+        $postID = $args['post_id'];
+
+
+        $jsonData = json_encode($comment->getPostComment($postID), JSON_PRETTY_PRINT);
+        $response->getBody()->write('<pre>' . $jsonData . '</pre>');
+        return $response->withHeader('Content-Type', 'text/html');
+    });
+
+
+
 
 
 };
