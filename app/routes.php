@@ -9,7 +9,11 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
+
 return function (App $app) {
+
+    //database connect..
+
 
 
     $app->get('/', function (Request $request, Response $response) {
@@ -17,8 +21,16 @@ return function (App $app) {
         return $response;
     });
 
-    $app->group('/users', function (Group $group) {
-        $group->get('', ListUsersAction::class);
-        $group->get('/{id}', ViewUserAction::class);
+    //get and post..
+    $app->get('/users', function (Request $request, Response $response) {
+
+        $post = new Model\Post();
+
+
+        $response->getBody()->write($post->test());
+
+        return $response;
     });
+
+
 };
