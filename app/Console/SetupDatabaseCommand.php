@@ -51,6 +51,48 @@ class SetupDatabaseCommand
 
             echo "Veritabanı '$database' başarıyla oluşturuldu.\n";
 
+
+
+            //fiil the table with some data
+
+            //https://jsonplaceholder.typicode.com/posts
+            $posts = json_decode(file_get_contents('https://jsonplaceholder.typicode.com/posts'), true);
+
+
+            foreach ($posts as $post) {
+
+                $userId = $post['userId'];
+                $id = $post['id'];
+                $title = $post['title'];
+                $body = $post['body'];
+
+                $stmt = $pdo->prepare("INSERT INTO `$database`.`posts` (userId, title, body) VALUES (:userId, :title, :body)");
+                $stmt->execute(['userId' => $userId, 'title' => $title, 'body' => $body]);
+
+            }
+
+            echo "Post verileri  dolduruldu.\n";
+
+            $comments = json_decode(file_get_contents('https://jsonplaceholder.typicode.com/comments'), true);
+
+
+            foreach ($comments as $comment) {
+
+                $postId = $comment['postId'];
+                $name = $comment['name'];
+                $email = $comment['email'];
+                $body = $comment['body'];
+
+                $stmt = $pdo->prepare("INSERT INTO `$database`.`comments` (postId, name, email, body) VALUES (:postId, :name, :email, :body)");
+                $stmt->execute(['postId' => $postId, 'name' => $name, 'email' => $email, 'body' => $body]);
+            }
+
+            echo "Yorum verileri  dolduruldu.\n";
+
+
+
+
+
         } catch(PDOException $e) {
             echo "Veritabanı oluşturma başarısız: " . $e->getMessage() . "\n";
             exit(1);
