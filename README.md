@@ -1,4 +1,4 @@
-# Proje Adı
+
 
 Bu proje, slim freamwork servislerini kullanmak için yazılmıştır.
 
