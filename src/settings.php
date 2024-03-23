@@ -6,7 +6,7 @@ return [
             'host' => 'localhost',
             'database' => 'slim-services',
             'username' => 'root',
-            'password' => '',
+            'password' => 'rootroot',
             'port' => '3306'
         ]
     ]
